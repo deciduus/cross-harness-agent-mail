@@ -2,8 +2,9 @@
 
 Inspected user-selected local sources on 2026-10-02 and rechecked on 2026-10-03.
 Locations are intentionally
-represented by logical labels; personal paths and project identities are not
-part of the reusable package. Source skills, role files and live mailboxes were
+represented by logical labels; personal paths and live operational identities
+are not part of the reusable core. The README's origin credit is owner-approved.
+Source skills, role files and live mailboxes were
 left unchanged. No session stores, credentials or conversation logs were read.
 
 | Source label | SHA-256 / revision | Treatment |
@@ -71,20 +72,30 @@ remains scoped to that trial. The focused receiving clarification also consulted
 [official Claude Code scheduling documentation](https://code.claude.com/docs/en/scheduled-tasks)
 on 2026-10-03. Its limits are attributed to that host, not inferred as universal.
 
-## Rights status
+## License and source notices
 
-No LICENSE or NOTICE file was found in the inspected trial's working root or
-tracked tree. The selected files were supplied as user-owned sources, but
-exclusive copyright/title and any upstream obligations have not been independently
-established. The user's explicit authorization covers this sanitized private
-review repository. It does not establish a public redistribution license.
+On 2026-10-03, the owner explicitly approved the standard MIT license with
+`Copyright (c) 2026 Landon Holden` for this collection. [LICENSE](../LICENSE)
+uses GitHub's official MIT template with only the approved year/name substituted;
+`package.json` declares `MIT`. This supersedes the earlier private-review
+placeholder that made no license grant. Repository visibility remains private;
+`private: true` in package metadata also keeps npm publication disabled.
 
-The original script is retained with its source comments. New code and prose
-also have no permissive license grant. `package.json` is private; no LICENSE is
-invented. This document is provenance, not legal advice or a substitute license.
+The selected sources were supplied as user-owned material. The retained trial
+script's inspected history contains two source commits under its local author's
+label; the trial has no configured upstream remote, LICENSE or NOTICE in its
+inspected root/tracked tree. No conflicting third-party notice or bundled
+third-party framework was found. The owner-approved MIT choice covers this
+collection, including the retained copy; no original trial or installed skill
+was relicensed or modified. This records supplied provenance and authorization,
+not an independent determination of exclusive copyright title.
 
-Before making the repository public, confirm rights to retained/adapted sources,
-identify any missing upstream notice, choose the license with the owner, and
-repeat the staged-tree/history privacy scan. Remove or replace any source whose
-redistribution rights cannot be confirmed. Choose actual platform/session
-claims only after matching tests; private review does not prove live wake-up.
+Original script comments and exact source bytes remain preserved. Linked host
+documentation and runtime tools are not bundled or relicensed. Future external
+source/assets must retain their actual notices and compatible rights; this
+project's MIT license cannot grant rights the contributor does not hold.
+
+Before making the repository public, finish the requested workflow review,
+repeat staged-tree/history privacy checks, verify any newly claimed host
+capabilities and obtain explicit publication approval. MIT licensing does not
+change visibility or establish live session-control support.

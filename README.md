@@ -8,8 +8,9 @@ clear ownership across sessions.
 GitHub handoffs use existing authorized tools; session activation comes from
 the host. It supports Codex-only, Claude-only, mixed and other-agent workflows.
 
-**Private review package. No open-source license is granted.**
-See [provenance and rights](references/provenance.md) before redistribution.
+**MIT licensed.** Copyright (c) 2026 Landon Holden. See [LICENSE](LICENSE)
+and [source provenance](references/provenance.md). The repository remains
+private while the workflow review is in progress.
 
 ## Operating example: dot / lead chat, Codex executor and Claude coordinator
 
@@ -60,8 +61,8 @@ host or the orchestrator's session manager.
 
 ## Why this exists
 
-This started while the owner was coordinating Codex and Claude on a complex
-game project. Work was happening in several places, but handoffs were easy to
+Built by **Landon Holden** while developing **Ergod** and coordinating Codex
+and Claude. Work was happening in several places, but handoffs were easy to
 miss, two workers could approach the same file, queues could sit idle, and a
 finished piece did not always reach the integrated result.
 

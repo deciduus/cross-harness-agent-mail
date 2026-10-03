@@ -134,7 +134,9 @@ terms, oversized files and unexpected generated artifacts. It is heuristic:
 human source/provenance review remains necessary. No private mailbox states,
 tokens, logs, local configuration or session evidence belongs in this tree.
 
-Before public release: resolve source rights and license choice, repeat privacy
+The owner approved MIT licensing with the stated copyright attribution;
+source provenance and retained comments remain recorded. Before public release,
+review rights/notices for any newly added external content, repeat privacy
 and history scans, test any newly claimed platform/host adapters, and decide
 whether the retained legacy compatibility script remains useful. Toolkit-native
 session wake/stop remain unsupported until a tested adapter is added; existing

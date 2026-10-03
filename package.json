@@ -2,6 +2,7 @@
   "name": "agent-mail-coordinator",
   "version": "0.2.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "Bounded local handoffs for user-facing leaders, coordinators and executors",
   "engines": {"node": ">=22"},

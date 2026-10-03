@@ -1,7 +1,7 @@
 # Private review of version 0.2.0
 
-This update remains a private inspection package. It has no public release or
-redistribution license. The initial mailbox/legacy behavior is retained; the
+This update remains a private inspection package under the owner-approved
+[MIT license](../LICENSE). It has not been made public. The initial mailbox/legacy behavior is retained; the
 update makes the actual human workflow easier to inspect and test.
 
 ## What changed and why
@@ -63,8 +63,8 @@ its exact running host APIs/lifetime were not independently validated. See
 
 ## Decisions before a public release
 
-1. Confirm retained/adapted source rights and any upstream notice; choose a
-   license with the owner. No permissive grant has been invented.
+1. Preserve the owner-approved MIT attribution and inspected source provenance;
+   verify rights/notices for any newly introduced external content.
 2. Review the exact intended Git history, authors and artifacts again for
    private material. Keep local configuration, receipts/tokens and live logs out.
 3. Test every newly claimed operating system, filesystem and host adapter. The
@@ -74,4 +74,6 @@ its exact running host APIs/lifetime were not independently validated. See
 
 The skill-creator's official validator remains unavailable because its installed
 Python lacks PyYAML; the documented simple structural fallback is narrower.
-Public-readiness work does not remove that limitation or the rights decision.
+Public-readiness work does not remove that limitation. The owner's MIT choice
+is recorded in [provenance](provenance.md); actual executor/coordinator feedback
+and explicit publication approval remain separate.
