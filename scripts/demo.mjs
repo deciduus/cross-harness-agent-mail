@@ -28,10 +28,10 @@ export async function runDemo(engine = 'mixed') {
       return result;
     };
     await run('init', { actor: 'operator' });
-    const delivered = await run('send', { from: 'coordinator', to: 'builder', kind: 'request', body: 'Inspect the synthetic file; report its line count. No edits needed.', scope: ['src/'], refs: ['src/sample.txt'], idempotencyKey: 'demo-request' });
+    const delivered = await run('send', { from: 'coordinator', to: 'builder', kind: 'review', body: 'Inspect the synthetic file; report its line count. No edits needed.', scope: ['src/'], refs: ['src/sample.txt'], idempotencyKey: 'demo-request' });
     const claimed = await run('claim', { actor: 'builder', session: 'synthetic-builder', id: delivered.message.id, idempotencyKey: 'demo-claim' });
     const owner = { actor: 'builder', session: 'synthetic-builder', id: delivered.message.id, token: claimed.message.claim.token };
-    const ack = await run('reply', { ...owner, kind: 'ack', body: 'Receipt: demo-request; target: synthetic project; reservation: src/; next action: count source lines.', idempotencyKey: 'demo-receipt' });
+    const ack = await run('reply', { ...owner, kind: 'ack', body: 'Receipt: demo-request; target: synthetic project; inspection scope: src/; no write reservation; next action: count source lines.', idempotencyKey: 'demo-receipt' });
     const sourceText = await readFile(path.join(projectRoot, 'src', 'sample.txt'), 'utf8');
     const lineCount = sourceText.trimEnd().split('\n').length;
     const result = await run('reply', { ...owner, kind: 'result', status: 'ok', body: `Evidence: synthetic source has ${lineCount} line(s); pinned SHA256 ${delivered.message.refs[0].sha256}. Next owner: coordinator.`, idempotencyKey: 'demo-result' });
@@ -39,7 +39,7 @@ export async function runDemo(engine = 'mixed') {
     const received = await run('read', { id: result.message.id });
     const wake = await mailbox.execute('wake', { actor: 'builder' });
     assert.equal(wake.code, 5);
-    return { ok: true, mode: engine, syntheticOnly: true, request: delivered.message.id, receiptKind: ack.message.kind, resultOutcome: received.message.outcome, completed: true, wakeSupported: false, cleanup: 'synthetic temporary directory removed' };
+    return { ok: true, mode: engine, syntheticOnly: true, request: delivered.message.id, requestKind: delivered.message.kind, sourceSha256: delivered.message.refs[0].sha256, receiptKind: ack.message.kind, resultOutcome: received.message.outcome, completed: true, wakeSupported: false, cleanup: 'synthetic temporary directory removed' };
   } finally { await rm(root, { recursive: true, force: true }); }
 }
 

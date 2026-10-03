@@ -10,6 +10,20 @@ Workspace placement is project configuration: active source, runtime/test
 artifacts and archive roots can differ. Do not inherit dated drive/machine paths
 from a source example or relocate another owner's active workspace.
 
+## Current direction and ready work
+
+Prioritize an explicitly requested ready fix through the existing integration/
+serving owner with pinned inputs, focused receiving/build checks and rollback.
+Optional idle periods, historical WIP counts, routine resource order and a broad
+audit are not default gates. Reuse current ownership and valid evidence instead
+of restarting a paperwork loop; actual overlapping custody, STOP, dependencies
+and permissions remain boundaries. Current user direction supersedes an old
+performance diversion. Activate the actual owner through a verified host route,
+or return the exact owner/packet/next action to the parent when unavailable.
+Source preparation can proceed in an authorized pinned scratch route when the
+active target lacks a write grant; only its owner receives it. See
+[observed practice](learning.md) for adoption, tool extraction and bounded review.
+
 ## Compatible batches and forward repair
 
 Pin the combined base and each included head, dependency order and exact scopes.
@@ -32,6 +46,9 @@ Maintain distinct evidence states: proposed → implemented → independently
 reviewed (if assigned) → source-admitted (if tracked) → integrated → accepted for a named scope → authorized
 publication → served/artifact identity verified. These are ledger claims,
 not an automatic state machine or permissions granted by this toolkit.
+They can occur in different orders under an explicitly authorized development
+experiment. Track actual [delivery evidence](handoff.md#delivery-evidence-states)
+without making every named state a mandatory gate or inferring acceptance.
 Source-admitted records the receiving owner admitting the pinned source; it
 does not establish combined behavior, quality acceptance or publication authority.
 
@@ -40,6 +57,9 @@ does not establish combined behavior, quality acceptance or publication authorit
 Name the actual contended resource, current holder, purpose, bounded turn,
 release condition and next owner. Consult the project's verified resource
 mechanism; do not infer availability from a historical receipt or lease expiry.
+An independent queue describes scheduling, not hardware isolation. Coordinate
+measured shared contention while independent queues continue. An authorized
+urgent fix can change routine order through the current resource owner.
 Only release your own exact resource through its owner mechanism. Independent
 authoring, small CPU probes, dependency analysis and packet preparation continue
 while a renderer, shared browser, heavy build or service is reserved.

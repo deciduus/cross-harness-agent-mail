@@ -96,6 +96,15 @@ user's existing environment/publication authorization. Keep one integration
 writer and named fix owners; independent CPU work can continue while genuinely
 contending resources wait. This toolkit installs no scheduler or daemon.
 
+For ready work, actual owner activation, bounded critic feedback or repeated
+manual operations, read [observed practice](references/learning.md). Use current
+direction and the existing owner/ledger; optional idleness or routine paperwork
+must not stall an authorized ready fix. Preserve real claims, dependencies and
+permissions. Keep sent, turn-started, owner-ACKed, source-ready, admitted, joined,
+exact-served and experience-accepted evidence distinct, tracking only relevant
+transitions. A pending receiving ACK does not erase observed activity. Reuse
+existing tools/contracts before extracting another system.
+
 Before adapting the package or a public release, read
 [provenance and rights](references/provenance.md) and
 [validation coverage](references/validation.md). Preserve the legacy source

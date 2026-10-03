@@ -66,6 +66,11 @@ implement your own competing fix. Repeat affected checks after repair and reuse
 unaffected evidence. Criticism informs integration; it creates no extra universal
 publication gate. The configured critic role may claim reviews but not write
 implementation requests; review scope is read scope and does not reserve writes.
+After a major integrated batch, reuse retained critics and existing diagnostics
+on exact served identity. Include user motives, agency, continuity, discovery,
+useful ideas and next steps alongside defects. Bound sampling and report observer
+cost; retain inconclusive lag findings separately from proven CPU/source failures.
+See [observed practice](learning.md#make-critic-feedback-useful-at-a-bounded-cost).
 
 ## Integrator (workflow assignment)
 

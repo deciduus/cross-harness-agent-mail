@@ -88,6 +88,12 @@ inspectable; active badges and posted plans do not prove an integrated result.
 The package supplies local status and receipt data, not a universal dashboard or
 cross-platform agent manager. See [topology](references/topology.md).
 
+[Observed practice](references/learning.md) covers ready-work integration,
+actual owner activation, bounded feedback and extracting repeated work into
+existing tools. Its adoption account distinguishes verified, partial and pending
+results. [Delivery states](references/handoff.md#delivery-evidence-states) and
+the [synthetic ledger](examples/delivery-ledger.json) keep those gaps visible.
+
 The same shape can help a software build/test team, a researcher handing a
 source-backed draft to a reviewer, or a production workflow moving a prepared
 asset to its assembler. Those are workflow examples, not claims of tested

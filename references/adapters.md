@@ -19,6 +19,11 @@ message, cron or process command is attempted.
 The CLI's `wake: false`/`stopSession: false` describe its manual adapter only.
 They do not disable or deny a host's independently configured session timers,
 background notifications or controls.
+Inventory the current host's actual execution surface and tool/version before
+claiming availability. A directory or published feature is not proof it works
+in this executor. If a required native activation route is unavailable, return
+the exact owner/packet/next action to the parent/operator. Known owner activity
+and pending receiver ACK remain separate [evidence](handoff.md#delivery-evidence-states).
 
 To add another agent, configure a unique participant ID, role and `engine: other`
 and have an explicitly activated session consume the CLI. To add real session

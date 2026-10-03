@@ -76,9 +76,9 @@ its exact running host APIs/lifetime were not independently validated. See
 4. Decide whether to keep the legacy compatibility script, whose original
    mailbox format and weaker limits are separate from the generalized core.
 
-The skill-creator's official validator remains unavailable because its installed
-Python lacks PyYAML; the documented simple structural fallback is narrower.
-Public-readiness work does not remove that limitation. The owner's MIT choice
+The initial selected Python lacked PyYAML. The observed-practice follow-up
+used already installed Python 3.12 and passed the official skill validator;
+the dependency-free fallback remains narrower. The owner's MIT choice
 is recorded in [provenance](provenance.md). Actual executor feedback confirmed
 the topology and supplied the documentation corrections recorded in
 [validation](validation.md). The actual Claude coordinator's workflow review

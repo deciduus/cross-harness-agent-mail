@@ -1,0 +1,27 @@
+{
+  "exampleOnly": true,
+  "packet": "synthetic-ready-source",
+  "directionRevision": "example-current-direction",
+  "workOwner": "builder",
+  "receivingOwner": "coordinator",
+  "stages": {
+    "sent": {"status": "observed", "evidence": "synthetic delivery receipt"},
+    "turnStarted": {"status": "unverified", "evidence": null},
+    "ownerAcked": {"status": "observed", "evidence": "synthetic owner ACK"},
+    "sourceReady": {"status": "observed", "evidence": "synthetic pinned artifact and focused result"},
+    "admitted": {"status": "pending", "evidence": null},
+    "joined": {"status": "pending", "evidence": null},
+    "exactServed": {"status": "pending", "evidence": null},
+    "experienceAccepted": {"status": "pending", "evidence": null}
+  },
+  "receivingAck": {"status": "pending", "evidence": null},
+  "next": {
+    "owner": "coordinator",
+    "action": "Receive the pinned result on the existing target, run focused checks, and return actual admission/join evidence."
+  },
+  "limits": [
+    "This is an illustrative ledger, not CLI action input or an enforced state machine.",
+    "Synthetic mail receipts do not prove a live agent turn started.",
+    "The manual adapter cannot activate sessions or serve artifacts."
+  ]
+}

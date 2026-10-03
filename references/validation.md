@@ -131,12 +131,40 @@ observations and external seam/resource agreements are not toolkit guarantees.
 Diagram source was reviewed for roles and boundaries; rendered pixels were
 not independently checked in this follow-up.
 
-The installed skill-creator's `quick_validate.py` was attempted. Its installed
-Python lacks PyYAML (`ModuleNotFoundError: yaml`); no dependency was installed.
+At the initial checkpoint, the selected Python lacked PyYAML when the official
+skill-creator validator was attempted; no dependency was installed. The later
+observed-practice follow-up used an already installed Python 3.12 and passed
+that official validator. This public validation modified no installed skills.
 The package's dependency-free fallback validates its authored simple frontmatter,
 skill name, UI invocation, local reference links and scaffolding. It is not a
 general YAML parser. Behavioral proof comes from executable mailbox tests and
 an independent forward pass, not that structural fallback.
+
+## Observed-practice follow-up
+
+Selected authorized internal receipts supported active-copy convergence and
+partial coordinator adoption, with other candidate/tool receiving still pending.
+The public guidance generalizes ready-work integration, actual owner activation,
+independent queues, low-cost criticism, incremental tool reuse and preserving
+current owner edits. It does not copy private inventories or claim all internal
+adoption, native acceptance, or resolution of an open proposal/approval finding.
+
+The synthetic delivery ledger is illustrative, not CLI input or an enforced
+state machine. The read-only demo now uses `review` and returns its actual
+request kind and pinned source hash. Its ACK names read scope without a write
+reservation. A fresh temporary snapshot passed all 40 tests and both the
+structural/link/hash check and official skill validation. A separate example
+probe passed Codex-only, Claude-only and mixed modes: real synthetic delivery/
+ACK/pinned-result evidence was retained while host activation stayed unverified
+and receiving, admission, joining, serving and experience acceptance stayed
+pending. These fixtures start no live agent, server, scheduler or GPU workload.
+An independent read-only forward review repeated all 40 tests, the structural
+check and three demo modes, and confirmed the exact diagram and preserved
+core/adapter/license bytes. The official validator PASS was a separate run.
+
+The core, CLI, legacy adapter, MIT bytes and accepted README diagram are
+unchanged. Source-workflow inventory/correction helpers are not added to this
+package; their own source-ready tests do not establish receiving or activation.
 
 ## Limits and release review
 
@@ -168,7 +196,7 @@ human source/provenance review remains necessary. No private mailbox states,
 tokens, logs, local configuration or session evidence belongs in this tree.
 
 The owner approved MIT licensing with the stated copyright attribution;
-source provenance and retained comments remain recorded. Before public release,
+source provenance and retained comments remain recorded. Before future public updates,
 review rights/notices for any newly added external content, repeat privacy
 and history scans, test any newly claimed platform/host adapters, and decide
 whether the retained legacy compatibility script remains useful. Toolkit-native

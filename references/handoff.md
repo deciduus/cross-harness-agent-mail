@@ -61,3 +61,30 @@ one integration owner composes the patches; no whole-file overwrite. This is
 an external coordination agreement, not symbol-level enforcement by the CLI.
 Its write reservations still cover files/directories, so conflicting claims
 cannot become concurrent writers merely by declaring disjoint functions.
+
+## Delivery evidence states
+
+Record only relevant transitions in the existing ledger. These labels are
+evidence claims, not eight new gates or an enforced CLI state machine:
+
+| State | Minimum evidence |
+| --- | --- |
+| Sent | Saved transport receipt or read-back post |
+| Turn-started | Verified host start receipt or concrete current owner activity |
+| Owner-ACKed | Actual work-owner acknowledgement of packet, scope and next action |
+| Source-ready | Pinned tested commit/patch or artifact, focused checks and limits |
+| Admitted | Receiving owner checked the pin, applicability, scope and dependencies |
+| Joined | Receiving combined commit/artifact contains the work and affected checks passed |
+| Exact-served | Actual serving/build identity matches the named artifact |
+| Experience-accepted | Named user/player/native criteria were actually exercised and accepted |
+
+A work-owner ACK and a downstream receiving ACK answer different questions.
+Observed work/source readiness remains observed when receiving ACK is pending.
+Serving and experience acceptance need separate evidence; CPU tests alone do
+not prove native interaction. Authorization remains the user's/host's existing
+decision, separate from any state above.
+
+[delivery-ledger.json](../examples/delivery-ledger.json) illustrates synthetic
+mail/ready-source evidence with unknown host activation and pending receiving.
+It is not CLI input and grants no permission; the CLI does not ingest or advance
+it. Retain a pending state's exact next owner/action while independent work moves.
