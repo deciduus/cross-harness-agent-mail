@@ -1,8 +1,9 @@
 # Private review of version 0.2.0
 
-This update remains a private inspection package under the owner-approved
-[MIT license](../LICENSE). It has not been made public. The initial mailbox/legacy behavior is retained; the
-update makes the actual human workflow easier to inspect and test.
+This records the private inspection that preceded the owner's publication of
+`cross-harness-agent-mail` on 2026-10-03 under the approved
+[MIT license](../LICENSE). The initial mailbox/legacy behavior is retained;
+the update makes the actual human workflow easier to inspect and test.
 
 ## What changed and why
 
@@ -64,7 +65,7 @@ Claude Routine. The local sources and host documentation support the approach;
 its exact running host APIs/lifetime were not independently validated. See
 [adapters](adapters.md#interactive-claude-session-background-receiving).
 
-## Decisions before a public release
+## Checks for future public updates
 
 1. Preserve the owner-approved MIT attribution and inspected source provenance;
    verify rights/notices for any newly introduced external content.
@@ -83,5 +84,5 @@ the topology and supplied the documentation corrections recorded in
 [validation](validation.md). The actual Claude coordinator's workflow review
 also confirmed the model and supplied the host-boundary, authority, pinned
 handoff and resource corrections now documented. It did not review runtime
-scripts/tests. Both lane reviews are complete; explicit publication approval
-remains separate and pending.
+scripts/tests. Both lane reviews are complete. The owner subsequently published
+the repository; that visibility change does not establish untested host support.

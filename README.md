@@ -4,13 +4,16 @@ Talk to a lead agent. Let coordinators and executors organize the work. Use
 GitHub for shared progress and local agent mail for private handoffs, with
 clear ownership across sessions.
 
-`agent-mail-coordinator` is a small skill and local file-mail toolkit.
+[cross-harness-agent-mail](https://github.com/deciduus/cross-harness-agent-mail)
+packages the `agent-mail-coordinator` skill and local file-mail toolkit.
 GitHub handoffs use existing authorized tools; session activation comes from
 the host. It supports Codex-only, Claude-only, mixed and other-agent workflows.
 
 **MIT licensed.** Copyright (c) 2026 Landon Holden. See [LICENSE](LICENSE)
-and [source provenance](references/provenance.md). The repository remains
-private while the workflow review is in progress.
+and [source provenance](references/provenance.md). The owner has published the
+repository. The installed skill name remains `agent-mail-coordinator`;
+`package.json`'s `private: true` prevents npm publication and does not set GitHub
+visibility.
 
 ## Operating example: dot / lead chat, Codex executor and Claude coordinator
 
@@ -34,32 +37,30 @@ documents session scheduling and cloud Routines. See
 and [Claude Code scheduling](https://code.claude.com/docs/en/scheduled-tasks).
 
 ```mermaid
-flowchart TB
-  U[User] <--> L[dot / lead-agent chat]
-  L <-->|briefs and findings| P[GitHub PR / shared coordination]
-  subgraph T[Platform teams]
-    direction LR
-    subgraph X[Codex example]
-      direction TB
-      E[Executor] --> A[Workers / optional critic]
-    end
-    subgraph Y[Claude example]
-      direction TB
-      C[Interactive coordinator] --> B[Workers / optional critic]
-    end
-    E <-->|private local handoff| C
-  end
-  P <--> E
-  P <--> C
-  A --> I[Existing integration owner]
-  B --> I
-  I --> V[Verified result / lead reports back]
+flowchart LR
+  U[User] <-->|goals / feedback| L[dot / lead-agent chat]
+  L <-->|briefs / findings| E[Codex executor]
+  L <-->|direction / receipts| C[Claude coordinator]
+  E <-->|PRs / local mail| C
+  E <-->|scope / evidence| A["Codex workers<br/>optional critics"]
+  C <-->|scope / evidence| B["Claude workers<br/>optional critics"]
+  A --> R["Review<br/>affected checks"]
+  B --> R
+  R -->|RED| F["Same owner<br/>forward repair"]
+  F -->|affected recheck| R
+  R -->|PASS| I["Existing integration<br/>owner"]
+  I --> V["Verified combined<br/>result"]
+  V ==>|report / next direction| L
 ```
 
-Read from top to bottom: direction, shared coordination, platform teams, then
-one integrated result. Host timers and session messages activate receiving
-separately; they are not another work queue. Direct user direction and the
-return of findings are described below rather than drawn as crossing arrows.
+Follow the cycle: user direction reaches the lead, the two harness owners
+coordinate and exchange worker receipts, and review either passes to integration
+or returns to the same owner for repair and recheck. The verified combined
+result returns to the lead and user, informing the next direction. PRs are the
+shared coordination surface; local mail carries private handoffs. Neither is an
+extra work stage. Host timers/session messages activate receiving separately.
+The user can also address any owner or worker directly, with the change
+reconciled through those same feedback paths.
 
 These are logical responsibilities, not a required product/process hierarchy.
 Another capable chat can be the lead; small teams can combine roles. Codex-only,

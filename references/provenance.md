@@ -78,8 +78,11 @@ On 2026-10-03, the owner explicitly approved the standard MIT license with
 `Copyright (c) 2026 Landon Holden` for this collection. [LICENSE](../LICENSE)
 uses GitHub's official MIT template with only the approved year/name substituted;
 `package.json` declares `MIT`. This supersedes the earlier private-review
-placeholder that made no license grant. Repository visibility remains private;
-`private: true` in package metadata also keeps npm publication disabled.
+placeholder that made no license grant. The repository remained private at that
+checkpoint; the owner subsequently renamed it `cross-harness-agent-mail` and
+published it on 2026-10-03. `private: true` in package metadata keeps npm
+publication disabled independently of GitHub visibility. The installed skill
+name and executable package remain `agent-mail-coordinator`.
 
 The selected sources were supplied as user-owned material. The retained trial
 script's inspected history contains two source commits under its local author's
@@ -95,7 +98,7 @@ documentation and runtime tools are not bundled or relicensed. Future external
 source/assets must retain their actual notices and compatible rights; this
 project's MIT license cannot grant rights the contributor does not hold.
 
-Before making the repository public, finish the requested workflow review,
-repeat staged-tree/history privacy checks, verify any newly claimed host
-capabilities and obtain explicit publication approval. MIT licensing does not
-change visibility or establish live session-control support.
+The requested workflow reviews are complete, and the owner separately published
+the repository. Before subsequent public updates, repeat staged-tree/history
+privacy checks and verify any newly claimed host capabilities. MIT licensing
+does not itself change visibility or establish live session-control support.
