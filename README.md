@@ -37,20 +37,20 @@ documents session scheduling and cloud Routines. See
 and [Claude Code scheduling](https://code.claude.com/docs/en/scheduled-tasks).
 
 ```mermaid
-flowchart LR
-  U[User] <-->|goals / feedback| L[dot / lead-agent chat]
-  L <-->|briefs / findings| E[Codex executor]
-  L <-->|direction / receipts| C[Claude coordinator]
+flowchart TB
+  U[User] <-->|goals / feedback| L[dot / lead chat]
+  L <-->|brief / findings| E["Codex<br/>executor"]
+  L <-->|scope / receipts| C["Claude<br/>coordinator"]
   E <-->|PRs / local mail| C
-  E <-->|scope / evidence| A["Codex workers<br/>optional critics"]
-  C <-->|scope / evidence| B["Claude workers<br/>optional critics"]
-  A --> R["Review<br/>affected checks"]
+  E <-->|work / receipts| A["Codex workers<br/>optional critics"]
+  C <-->|work / receipts| B["Claude workers<br/>optional critics"]
+  A --> R[Review / checks]
   B --> R
-  R -->|RED| F["Same owner<br/>forward repair"]
-  F -->|affected recheck| R
-  R -->|PASS| I["Existing integration<br/>owner"]
-  I --> V["Verified combined<br/>result"]
-  V ==>|report / next direction| L
+  R -->|RED| F[Same owner repairs]
+  F -->|recheck| R
+  R -->|PASS| I[Existing integrator]
+  I --> V[Verified result]
+  V ==>|report / feedback| L
 ```
 
 Follow the cycle: user direction reaches the lead, the two harness owners
