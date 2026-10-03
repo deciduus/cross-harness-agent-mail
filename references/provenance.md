@@ -59,6 +59,18 @@ example are authored from that request, not copied host instructions. **dot** is
 an explicitly supplied illustrative leader name, not a core participant ID.
 Source skills and live project/mailbox state were never changed by this update.
 
+The owner subsequently confirmed a working Claude coordinator/Codex executor
+arrangement with background checks and interval wake-ups configured by the
+interactive Claude session, PRs/comments as the primary shared surface with
+local mail for sensitive handoffs, and dot / another lead-agent chat as the
+interchangeable user-facing orchestrator. This is an authored summary of
+user-reported usage, not a copied transcript or independent live-host test.
+Current coordinator hashes remain unchanged on recheck. Sources describe
+session cron and completion notifications; the manual mail trial's no-wake rule
+remains scoped to that trial. The focused receiving clarification also consulted
+[official Claude Code scheduling documentation](https://code.claude.com/docs/en/scheduled-tasks)
+on 2026-10-03. Its limits are attributed to that host, not inferred as universal.
+
 ## Rights status
 
 No LICENSE or NOTICE file was found in the inspected trial's working root or

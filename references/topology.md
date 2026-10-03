@@ -1,8 +1,10 @@
 # Leader, coordinator, executor and platform teams
 
-The user usually chats with a user-facing leader. In the originating arrangement
-that Codex-side leader is called **dot**. It could instead be a leader chat in
-Claude or another capable host. The executor and operational coordinator are
+The user usually chats with **dot or a lead-agent session**: interchangeable
+user-facing orchestration roles that hold project direction/context, translate
+requests into focused briefs, delegate, reconcile findings and report back.
+In the originating arrangement dot is Codex-side; it could instead be a lead
+chat in Claude or another capable host. The executor and operational coordinator are
 different responsibilities; the coordinator currently runs in Claude Code in
 that arrangement, but is configurable. Names and products are examples, not
 hardcoded service identities or claims of automatic compatibility.
@@ -10,12 +12,20 @@ hardcoded service identities or claims of automatic compatibility.
 The leader refines intent and sends a useful brief to an executor. The executor
 works with a coordinator to route work, reserve seams and return evidence. Each
 platform can maintain its own agents/workers through its supported native tools.
-Local mail and exact handoff interfaces join those teams. This package implements
+PR coordination, local mail and exact handoff interfaces join those teams.
+This package implements
 the mail boundary, not those native agent managers.
+The owner reports that the Claude coordinator stays in sync with a Codex
+executor through background checks and interval activation configured by the
+interactive Claude session, without a pre-existing Claude Routine. PRs/comments
+are the primary shared surface; local mail carries sensitive/machine-local
+handoffs, correlated to that shared decision ledger. See
+[host-owned receiving](adapters.md#interactive-claude-session-background-receiving)
+for the distinction from toolkit-native capabilities and lifetime caveats.
 
 ```mermaid
 flowchart TB
-  U[User] --> L[User-facing leader]
+  U[User] <--> L[dot / interchangeable lead-agent chat]
   L -->|scoped brief| E[Executor]
   E <-->|ownership and evidence| C[Operational coordinator]
   subgraph A[Platform A]
@@ -37,6 +47,7 @@ flowchart TB
   I --> V[Verified combined artifact and user-visible status]
 ```
 
+These responsibilities are logical, not a required product/process hierarchy.
 For a small Codex-only or Claude-only arrangement, leader and coordinator may be
 one participant. For larger same-platform teams they can be separate IDs. Mixed
 arrangements can swap either product. An `other` engine uses the manual CLI if
@@ -62,7 +73,8 @@ real permissions. The recipient still reconciles shared ownership and evidence:
    A refinement inside the current write scope can retain its claim/session.
 3. Notify the leader/coordinator through the authorized route. Delivery is not
    an ACK. If the host cannot wake it, record the pending activation and return
-   a pointer to the user; no guessed queue or polling loop.
+   a pointer to the user. Use an already configured host timer/notification when
+   available; do not invent a queue or active waiting loop.
 4. Resolve overlapping ownership or changed scope before those edits. Immutable
    packets are not rewritten in place. Finish/release the old work through its
    documented lifecycle, then dispatch a new reconciled packet for new scope.

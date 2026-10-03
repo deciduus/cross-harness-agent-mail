@@ -49,9 +49,17 @@ assignment metadata is descriptive, not new core authorization. See
 
 The manual CLI is a sensible boundary for other hosts capable of reading the
 skill and running local commands. No universal plugin compatibility, automatic
-chat interception, wake, stop or native worker discovery is claimed. Mailbox
+chat interception, toolkit-native wake/stop or native worker discovery is claimed. Mailbox
 STOP does not interrupt an active source editor. These are separate capabilities
 that need actual host-specific adapters and evidence.
+The owner separately reports that an interactive Claude coordinator configures
+background checks/interval activation to stay synchronized with a Codex
+executor, primarily on PRs/comments with sensitive local-mail handoffs, and
+dot / an interchangeable lead chat holding direction and
+reconciling findings. This host-owned receiving setup needs no pre-existing
+Claude Routine. The local sources and host documentation support the approach;
+its exact running host APIs/lifetime were not independently validated. See
+[adapters](adapters.md#interactive-claude-session-background-receiving).
 
 ## Decisions before a public release
 

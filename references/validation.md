@@ -89,6 +89,15 @@ still checks links, simple skill/UI frontmatter and the unchanged legacy hash.
 See [private review findings](public-review.md) for the source refresh,
 installation review and remaining public-release decisions.
 
+The subsequent documentation checkpoint clarifies dot / the interchangeable
+lead chat, PR-first shared coordination, sensitive local handoffs and
+host-owned interval receiving. Links/structure/source-hash validation, two
+focused capability/configuration checks and the mixed topology demo passed
+from a fresh temporary snapshot. Runtime code remains unchanged; these checks
+do not validate live timers or a GitHub transport. The requested review by the
+actual executor and Claude coordinator is pending; prior independent synthetic
+review is not represented as their approval.
+
 The installed skill-creator's `quick_validate.py` was attempted. Its installed
 Python lacks PyYAML (`ModuleNotFoundError: yaml`); no dependency was installed.
 The package's dependency-free fallback validates its authored simple frontmatter,
@@ -106,8 +115,16 @@ no automatic compaction/retention policy is implemented. Use it for bounded
 local projects, not an indefinitely growing distributed service.
 Engine fixtures prove distinct Codex-only, Claude-only and mixed labels can use
 the transport; they do not prove live host session activation, discovery or ACK.
+Separately, the owner reports a functioning Claude-coordinator/Codex-executor
+setup with interactive session-created background checks/interval activation,
+primarily PR/comment coordination and local mail for sensitive handoffs.
+Current local sources describe that approach, and official Claude Code docs
+describe session scheduling. This update documents that evidence without a
+live scheduling/API/lifetime test; the demos register no host tasks. CLI
+unsupported wake/stop results apply to toolkit-native controls, not external
+host capabilities. See [host-owned receiving](adapters.md#interactive-claude-session-background-receiving).
 The optional PR workflow has no automated posting adapter and was not exercised
-against a third-party PR. The private repository creation is package delivery,
+against a third-party PR by this package's tests. The private repository creation is package delivery,
 not a test of PR messaging.
 
 The release scanner inspects staged blobs, all reachable Git commit trees and
@@ -119,5 +136,6 @@ tokens, logs, local configuration or session evidence belongs in this tree.
 
 Before public release: resolve source rights and license choice, repeat privacy
 and history scans, test any newly claimed platform/host adapters, and decide
-whether the retained legacy compatibility script remains useful. Session wake
-and stop must remain unsupported until a tested adapter is added.
+whether the retained legacy compatibility script remains useful. Toolkit-native
+session wake/stop remain unsupported until a tested adapter is added; existing
+host-owned timers/notifications are separate capabilities.

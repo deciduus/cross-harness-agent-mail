@@ -6,6 +6,8 @@ Do not copy transcripts or instructions from the host into messages.
 
 ```text
 Packet: <stable packet key>
+Coordination: <canonical agreed PR/thread or local ledger; sanitized summary>
+Private correlation: <authorized private mailbox identity; keep off GitHub>
 Owner/role: <participant / executor>
 Project/target: <project label / branch>
 Base/head: <exact base commit> / <tested head commit>
@@ -35,6 +37,11 @@ ACK means receipt. Applied means a concrete commit on the receiving target
 contains the packet and the relevant verification passed. Record that commit
 in the result or integration ledger. Delivery timestamps and test counts are
 not quality acceptance.
+When bridging PRs and local mail, correlate one packet to its existing comment
+and private handoff; reuse existing actions rather than dispatching a second
+queue. A PR ACK/status omits private paths/tokens/payloads. The shared decision
+ledger and private claim state have distinct purposes; conflicts need the lead
+and current owners, not an automatic overwrite. See [bridge steps](adapters.md#using-local-mail-and-pr-comments-together).
 
 For a direct user interjection record: source session label, packet, requested
 change, retained/new scope, current owner, affected acceptance/evidence and

@@ -1,22 +1,41 @@
 # An anonymized end-to-end handoff
 
+The real operating example starts **User ↔ dot / lead-agent chat**. That
+interchangeable user-facing orchestrator keeps direction/context, refines briefs,
+delegates and reconciles findings before reporting back. The owner reports a
+Codex executor coordinating primarily through PRs/comments with an interactive
+Claude coordinator, and local mail carrying sensitive/machine-local handoffs.
+Session-created background checks and interval activation keep those surfaces
+in sync. Each platform can manage its own workers/critics. Roles can be combined
+or implemented in other hosts; they are not a rigid product/process hierarchy.
+The user can address any session directly, with reconciliation to relevant owners.
+
 Run `node scripts/topology-demo.mjs mixed` for the synthetic file-processing
 example. `codex` and `claude` use same-platform engine labels; `mixed` assigns
 different labels. None starts an actual agent. The ledger models manual host
 actions, not an automatic chat listener, notification service or agent manager.
+Its `leader` participant stands for dot or another lead chat. It simulates host
+activations rather than registering them. The reported Claude arrangement needs
+no pre-existing Routine; see [host-owned receiving](adapters.md#interactive-claude-session-background-receiving).
+The executable demo uses only the local file transport. In the real dual-surface
+workflow, the agreed PR/thread holds sanitized direction/status; private payloads
+and local claims stay in the authorized private mailbox. The same packet key
+correlates both, with a manual/agent relay, not two queues or a CLI GitHub adapter.
+See [bridge steps](adapters.md#using-local-mail-and-pr-comments-together).
 
 ```mermaid
 sequenceDiagram
   actor User
-  participant Leader
+  participant Leader as dot / lead-agent chat
   participant Executor
   participant Coordinator
   participant Worker
   participant Reviewer
   participant Integrator
   User->>Leader: Normalize a small catalog
+  Leader-->>User: Goal, context and focused acceptance
   Leader->>Executor: Scoped brief, input identity, acceptance
-  Executor->>Coordinator: Reservation and dependency handoff
+  Executor->>Coordinator: PR summary and correlated private handoff
   Executor->>Worker: Exact ownership offer
   Worker-->>Executor: Accept and ACK
   User->>Worker: Keep the original label too
@@ -35,7 +54,12 @@ sequenceDiagram
   Leader-->>User: Actual completion and remaining limits
 ```
 
-The leader refines a source-processing request into a bounded packet with input
+The sequence illustrates the workflow; the runnable fixture simulates these
+handoffs locally and posts no PR comments. Its ACK/claim/result assertions are
+mailbox evidence, not an independently tested GitHub bridge or live scheduler.
+
+Dot / the lead-agent chat refines the user's source-processing request into a
+bounded packet with input
 hashes and one output reservation. The executor arranges the handoff with the
 coordinator and transfers write custody to a named worker only after acceptance.
 Each recipient has a separate participant/session label. Other platform workers

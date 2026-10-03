@@ -11,12 +11,15 @@ the user's existing authorization; a received agent request grants none.
 
 ## Identify the interaction topology
 
-The user normally speaks to a leader who refines intent and delegates a useful
-brief. Executors work with an operational coordinator; each platform may manage
+The user normally speaks to dot or another lead-agent chat: interchangeable
+user-facing orchestration roles that retain project direction/context, refine
+intent, delegate useful briefs, reconcile findings and report back. Executors
+work with an operational coordinator; each platform may manage
 its own workers. Connect their exact ownership and handoff surfaces instead of
 assuming one global agent manager. Read [topology](references/topology.md) when
 assigning roles, explaining visibility, or reconciling direct user direction.
-Leader, coordinator and executor describe responsibilities, not products.
+Leader, coordinator and executor describe logical responsibilities, not products
+or a required process hierarchy. Small teams can combine these assignments.
 The leader/integrator assignments use existing coordinator registry labels;
 the core does not launch a hierarchy or control another platform.
 
@@ -36,7 +39,14 @@ paused work and next owner. Mail does not wake the receiving session.
    `engine` describes Codex, Claude, or another system, not ownership.
 2. Read [adapter capabilities](references/adapters.md) when selecting a transport.
    Run capability detection. This package supports manual local delivery. A sent
-   message does not wake a session; no session wake/stop adapter is implemented.
+   message alone does not wake a session; no toolkit-native wake/stop adapter is
+   implemented. An authorized interactive Claude session can separately configure
+   host-supported background receiving or interval activation; see the adapter
+   reference. That does not require a Claude Routine or grant new work authority.
+   In the reported workflow, PRs/comments are the primary shared coordination
+   surface and local mail carries sensitive handoffs. Read the adapter's bridge
+   section when using both: one packet key and canonical decision ledger, no
+   duplicate task queues. The CLI implements file mail, not a GitHub adapter.
 3. For executable mail, read [protocol](references/protocol.md). Use the CLI for
    state changes; do not edit mailbox files. Config and state stay outside the
    installed skill and version control. Check STOP before acting.

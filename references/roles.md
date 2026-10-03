@@ -6,6 +6,9 @@ the same roles with engine `claude`. Mixed teams need no different workflow.
 
 ## User-facing leader (workflow assignment)
 
+Dot and a lead-agent chat are interchangeable implementations of this role:
+the user-chat agent and/or orchestrator that holds project direction/context,
+turns requests into useful briefs and reconciles delivered findings.
 Keep the user's intent, refine ambiguous asks, choose the smallest useful task
 brief, and maintain a concise view of actual delivery. Delegate execution to the
 assigned executor and work with the operational coordinator; do not hide the
@@ -20,6 +23,8 @@ their separate assignments are stated in the brief/config example. The label
 does not confer session control or publication privileges. One participant can
 combine these responsibilities for small work; separate IDs help when they are
 separate sessions. See [topology](topology.md).
+The assignments are logical responsibilities, not a rigid product/process
+hierarchy or an implementation of the assistant host.
 
 ## Coordinator
 

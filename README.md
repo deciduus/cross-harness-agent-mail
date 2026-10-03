@@ -5,9 +5,58 @@ executors and their workers.
 Use separate participant IDs for Codex-only, Claude-only, mixed, or other-agent
 teams. It carries work and receipts; people or the host agent system activate
 sessions. It does not run agents, install daemons, poll, or schedule jobs.
+An interactive Claude session can configure its host's background mailbox
+checks and interval wake-ups separately; the toolkit does not register them.
 
 **Private review package. No open-source license is granted.**
 See [provenance and rights](references/provenance.md) before redistribution.
+
+## Operating example: dot / lead chat, Codex executor and Claude coordinator
+
+The user chats mainly with **dot**, or an interchangeable **lead-agent chat**:
+the user-facing orchestrator that holds project direction/context, translates
+requests into focused briefs, delegates, reconciles findings and reports back.
+The owner reports that a **Codex executor** and an interactive **Claude
+coordinator session** coordinate primarily through **GitHub PRs/comments**.
+They use local agent mail for sensitive or machine-local handoffs. Background
+checks and interval wake-ups configured by the Claude session keep those
+surfaces in sync. Each platform
+can manage its own workers and critics through its native tools.
+
+A pre-existing **Claude Routine is not required**. The receiving session uses
+its host's scheduling or notification tools; mailbox arrival alone does not
+wake it. This is user-reported functioning usage, not an independent test of
+that session's exact APIs, timing or lifetime. The inspected coordinator guidance
+describes session cron and background notifications; Claude Code separately
+documents session scheduling and cloud Routines. See
+[host-owned receiving setup and limits](references/adapters.md#interactive-claude-session-background-receiving)
+and [Claude Code scheduling](https://code.claude.com/docs/en/scheduled-tasks).
+
+```mermaid
+flowchart TB
+  U[User] <--> L[dot / lead-agent chat: direction and orchestration]
+  L -->|focused brief| E[Codex executor]
+  C[Interactive Claude coordinator] <--> P[GitHub PR/comments: shared coordination]
+  E <--> P
+  E <-->|private local handoff where accessible| C
+  H[Claude host interval or notification] --> C
+  E --> A[Codex workers and optional critic]
+  C --> B[Claude workers and optional critic]
+  U -. direct direction .-> E
+  U -. direct direction .-> C
+  U -. direct direction .-> B
+  E -. findings and reconciliation .-> L
+  C -. findings and reconciliation .-> L
+  E --> I[Existing integration owner]
+  I -->|verified result and evidence| L
+```
+
+These are logical responsibilities, not a required product/process hierarchy.
+Another capable chat can be the lead; small teams can combine roles. Codex-only,
+Claude-only and other mixed configurations use the same boundaries. The user
+can address any coordinator, executor or worker directly; relevant owners and
+the lead reconcile changed direction. The toolkit does not implement the chat
+host or the orchestrator's session manager.
 
 ## Why this exists
 
@@ -30,27 +79,9 @@ either side. The user can talk directly to any session or worker. New direction
 is recorded and reconciled with the leader/coordinator and current file owners;
 it must not silently widen a claim or disappear in a separate conversation.
 
-```mermaid
-flowchart TB
-  U[User] --> L[Leader: refine intent]
-  L -->|useful brief| E[Executor]
-  E <-->|ownership and handoff| C[Coordinator]
-  E --> A[Platform A workers]
-  C --> B[Platform B workers and critic]
-  A <-->|manual agent mail| B
-  U -. direct instruction .-> A
-  U -. direct instruction .-> B
-  A -. reconcile change .-> L
-  B -. reconcile change .-> C
-  E --> R[Exact result and evidence]
-  R --> I[Existing integrator]
-  I --> V[Verified combined artifact and visible status]
-  H[Person or verified host: activate sessions] -.-> E
-  H -.-> C
-```
-
-Sending a packet is delivery. It does not activate another session or prove
-receipt. Status, named lanes/sessions, ACKs and artifact identities make progress
+Sending a packet alone is delivery. A separately configured host timer or
+notification can activate the receiving session; neither a send nor a timer
+proves receipt. Status, named lanes/sessions, ACKs and artifact identities make progress
 inspectable; active badges and posted plans do not prove an integrated result.
 The package supplies local status and receipt data, not a universal dashboard or
 cross-platform agent manager. See [topology](references/topology.md).
@@ -71,14 +102,17 @@ and local files.
 Human control stays with the existing user and host: mail grants no permission,
 STOP halts ordinary mailbox actions, ownership changes need acceptance, and
 stale recovery requires an explicit operator decision. The toolkit labels roles;
-it does not authenticate people or sandbox source edits. A future tested adapter
+it does not authenticate people or sandbox source edits. Its `wake: false` and
+`stopSession: false` describe the toolkit-native manual adapter, not the host's
+separately available scheduling or session tools. A future tested toolkit adapter
 could wake a specific supported session or carry an envelope through another
 transport. It must report those capabilities separately and preserve the same
 receipt and ownership rules.
 
 ## A complete handoff, including a user interjection
 
-For a synthetic catalog job, the leader asks an executor to normalize labels.
+For a synthetic catalog job, the user speaks to dot / a lead-agent chat, which
+refines the goal and asks an executor to normalize labels.
 The executor and coordinator reserve an output file and hand it to a named
 worker. The user then tells that worker, “Keep the original label too.” The worker
 checkpoints its work, records the changed acceptance and sends an update upward.
@@ -93,6 +127,24 @@ direction, ACKs, RED→PASS repair, integrated hash and remaining limitations.
 This is actual synthetic file processing, not a recorded conversation or a live
 agent trial. [Worked example](references/worked-example.md) shows the steps and
 sequence diagram; the runnable demo makes the evidence observable.
+
+## Local mail and GitHub PRs: use both without two queues
+
+| Surface | Access and purpose | Receipts and limits |
+| --- | --- | --- |
+| GitHub PRs/comments | Primary shared surface in the reported workflow; accessible across hosts with authorized repository access. Keep agreed direction, owner, code-linked review and sanitized status here. | A saved post is delivery; a receiver reply is ACK; a tested receiving commit is applied. No atomic mailbox claim or CLI GitHub transport ships here. |
+| Local filesystem mail | Sensitive/machine-local payloads and exact local handoffs; consumers need access to the same permitted mailbox location. | CLI persists messages, fenced claims, ACK/result receipts and retries. Privacy depends on filesystem permissions; there is no encryption or authentication guarantee. |
+
+Keep one canonical coordination ledger, here the agreed PR/thread, and one
+stable packet key connecting its public-safe summary to the authorized private
+payload, local claim and ACK/result. Do not dispatch an independent duplicate
+task on the other surface. Absolute machine paths, credentials, tokens and
+private payloads stay off GitHub, including private PRs. Relay only the agreed
+decision/status and repository-relative evidence. Neither route alone grants
+execution authority or wakes a session. The supported bridge is manual or
+agent-relayed through authorized host tools, not a built-in GitHub adapter;
+[bridge steps and conflict handling](references/adapters.md#using-local-mail-and-pr-comments-together)
+give the full boundary. Local-only work remains supported without GitHub.
 
 ## Try it
 

@@ -11,6 +11,8 @@ Each claiming session also supplies a distinct label. Never reuse one session
 label concurrently. Engine values do not alter permissions or wake sessions.
 
 The manual adapter reports delivery support and unsupported session wake/stop.
+These capabilities describe this toolkit's adapter, not separately configured
+host timers or notifications; see [host-owned receiving](adapters.md#interactive-claude-session-background-receiving).
 Limits bound leases, TTL, body size and hops. The core performs no external
 messages, jobs, installation, process killing or source-file edits.
 
