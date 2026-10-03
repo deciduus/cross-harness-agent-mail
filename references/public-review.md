@@ -27,11 +27,14 @@ now report `partial`, name the leader as pending owner and state the next
 ownership-reconciliation action. Independent retained-envelope and artifact
 checks confirmed that correction; the original safe artifact still passes.
 
-The latest inspected coordinator fragment adds host-specific messaging limits
-and batching. Portable guidance keeps concise batched pointers and individual
-ownership receipts. It excludes numeric host caps, automatic schedules, native
-control commands, private destinations and live project constants. Provenance
-records current and prior source hashes without copying their private content.
+The inspected coordinator fragment and actual coordinator review add
+host-specific messaging/scheduling observations and batching. Portable guidance
+keeps concise shared broadcasts and individual receipts. A separate adapter
+section records that reviewed host's numeric cap and lifetime behavior with
+explicit evidence/coverage limits; these are not toolkit settings or universal
+host promises. Automatic schedules, native control commands, private
+destinations and live project constants remain excluded. Provenance records
+source hashes without copying private content.
 
 The release scan now checks commit messages and POSIX/escaped Windows paths as
 well as staged and historical trees. Runtime artifacts and oversized/generated
@@ -75,5 +78,10 @@ its exact running host APIs/lifetime were not independently validated. See
 The skill-creator's official validator remains unavailable because its installed
 Python lacks PyYAML; the documented simple structural fallback is narrower.
 Public-readiness work does not remove that limitation. The owner's MIT choice
-is recorded in [provenance](provenance.md); actual executor/coordinator feedback
-and explicit publication approval remain separate.
+is recorded in [provenance](provenance.md). Actual executor feedback confirmed
+the topology and supplied the documentation corrections recorded in
+[validation](validation.md). The actual Claude coordinator's workflow review
+also confirmed the model and supplied the host-boundary, authority, pinned
+handoff and resource corrections now documented. It did not review runtime
+scripts/tests. Both lane reviews are complete; explicit publication approval
+remains separate and pending.

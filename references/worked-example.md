@@ -60,12 +60,12 @@ mailbox evidence, not an independently tested GitHub bridge or live scheduler.
 
 Dot / the lead-agent chat refines the user's source-processing request into a
 bounded packet with input
-hashes and one output reservation. The executor arranges the handoff with the
+hashes and one `output/` directory reservation. The executor arranges the handoff with the
 coordinator and transfers write custody to a named worker only after acceptance.
 Each recipient has a separate participant/session label. Other platform workers
 can prepare independent inputs without claiming the same output.
 
-The direct user refinement changes acceptance inside that reservation. The
+The direct user refinement changes acceptance inside that directory reservation. The
 worker keeps the same claim/token and emits a concise note tied to the packet;
 the leader/coordinator reconcile it through a separate authorized handoff.
 Nobody replies to a terminal note. Recorded decision and actual receiver ACK

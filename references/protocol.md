@@ -13,24 +13,59 @@ label concurrently. Engine values do not alter permissions or wake sessions.
 The manual adapter reports delivery support and unsupported session wake/stop.
 These capabilities describe this toolkit's adapter, not separately configured
 host timers or notifications; see [host-owned receiving](adapters.md#interactive-claude-session-background-receiving).
-Limits bound leases, TTL, body size and hops. The core performs no external
+Limits bound leases, TTL, body/ref size and hops. The core performs no external
 messages, jobs, installation, process killing or source-file edits.
+
+## Defaults, bounds and expiry
+
+These values come from `createMailbox` and the shipped example configurations.
+Omitted limit fields use the core defaults; per-action durations can be shorter.
+
+| Setting | Default/configured maximum | Hard ceiling |
+| --- | --- | --- |
+| `maxLeaseSeconds` | 3,600 seconds (1 hour); also the default claim/accept lease | 86,400 seconds (24 hours) |
+| `maxTtlSeconds` | 86,400 seconds (24 hours); also the default message TTL | 604,800 seconds (7 days) |
+| `maxBodyBytes` | 204,800 bytes (200 KiB) of UTF-8 body | 1,048,576 bytes (1 MiB) |
+| `maxRefBytes` | 10,485,760 bytes (10 MiB) per referenced file | 20,971,520 bytes (20 MiB) |
+| `maxHops` | 3; reaching the configured threshold routes to the operator | 3 |
+| Reference count | At most 64 per message | Fixed, not a `limits` option |
+
+Limit overrides must be positive integers within their ceilings. Claim duration
+starts at claim/transfer acceptance; TTL starts at message creation. The example
+below deliberately uses a 600-second lease and 3,600-second TTL. Inspect returned
+`claim.leaseUntil` and `expiresAt`, rather than assuming every packet has defaults.
+
+There is no renewal or heartbeat operation. Host interval checks, notifications,
+ACKs, notes and idempotent claim retries do not extend a lease or TTL. An accepted
+transfer creates a new claim lease but retains the original message expiry;
+it is not a renewal API. Keep each work slice within both deadlines. On expiry,
+checkpoint and follow explicit operator reconciliation/recovery after verifying
+the previous worker has stopped; do not continue or steal the expired claim.
 
 ## CLI
 
-All actions accept JSON input files; outputs are JSON. Keep tokens and private
-inputs in your local private workspace. From the installed package directory:
+All actions accept JSON input files; outputs are JSON. Keep config, input JSON,
+token-bearing outputs and state in your private workspace outside the installed
+skill and version control. The commands below assume a sibling
+`coordination-private/` folder; adjust to the actual external location. Run from
+the package directory; operational private files live elsewhere:
 
 ```sh
-node scripts/mail.mjs capabilities --config local-config.json
-node scripts/mail.mjs init --config local-config.json --input init.json
-node scripts/mail.mjs send --config local-config.json --input request.json
-node scripts/mail.mjs check --config local-config.json --input check.json
-node scripts/mail.mjs claim --config local-config.json --input claim.json
-node scripts/mail.mjs reply --config local-config.json --input ack.json
-node scripts/mail.mjs reply --config local-config.json --input result.json
-node scripts/mail.mjs done --config local-config.json --input done.json
+node scripts/mail.mjs capabilities --config ../coordination-private/local-config.json
+node scripts/mail.mjs init --config ../coordination-private/local-config.json --input ../coordination-private/init.json
+node scripts/mail.mjs send --config ../coordination-private/local-config.json --input ../coordination-private/review.json
+node scripts/mail.mjs check --config ../coordination-private/local-config.json --input ../coordination-private/check.json
+node scripts/mail.mjs claim --config ../coordination-private/local-config.json --input ../coordination-private/claim.json
+node scripts/mail.mjs reply --config ../coordination-private/local-config.json --input ../coordination-private/ack.json
+node scripts/mail.mjs reply --config ../coordination-private/local-config.json --input ../coordination-private/result.json
+node scripts/mail.mjs done --config ../coordination-private/local-config.json --input ../coordination-private/done.json
 ```
+
+`--config` and `--input` paths resolve from the invocation's working directory.
+Within config, relative `projectRoot`/`mailboxDir` resolve from the config file's
+directory; scopes/refs resolve within that project root. Copying a template to
+the private folder changes where its relative roots point: configure them
+before using the CLI, never let them create state inside the installed skill.
 
 Use the demonstrated parser order; run `node scripts/demo.mjs` for an executable
 synthetic pass. Example action inputs:
@@ -42,7 +77,7 @@ synthetic pass. Example action inputs:
 The first input is for init. Dispatch:
 
 ```json
-{"from":"coordinator","to":"builder","kind":"request","body":"Ask: inspect source. Done when: focused check and evidence. Stop if: scope conflicts.","scope":["src/"],"refs":["src/sample.txt"],"ttlSeconds":3600,"idempotencyKey":"packet-a"}
+{"from":"coordinator","to":"builder","kind":"review","body":"Ask: inspect source without editing it. Done when: focused check and evidence. Stop if: new permission is required.","scope":["src/"],"refs":["src/sample.txt"],"ttlSeconds":3600,"idempotencyKey":"packet-a"}
 ```
 
 Claim:
@@ -81,6 +116,11 @@ pins references by full SHA-256. Read/claim/transfer-acceptance diagnostics iden
 they do not silently rewrite a packet or authorize altered dependencies.
 Paths are validated again on consumption. Scope is an instruction/reservation,
 not a filesystem sandbox. Do not execute bodies as code.
+
+Use `kind: review` for read-only inspection, with `scope` naming inspected paths.
+It can coexist with a writer and creates no write reservation. A claimed
+`request` reserves its write scope; choose it for authorized editing, not merely
+to inspect a file. These labels do not authenticate an agent or sandbox edits.
 
 A request/review moves `new` → `claimed` → `done` after a terminal result. ACK and
 note are nonterminal receipts; result status is `ok`, `partial`, `refused`, or

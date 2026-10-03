@@ -94,9 +94,42 @@ lead chat, PR-first shared coordination, sensitive local handoffs and
 host-owned interval receiving. Links/structure/source-hash validation, two
 focused capability/configuration checks and the mixed topology demo passed
 from a fresh temporary snapshot. Runtime code remains unchanged; these checks
-do not validate live timers or a GitHub transport. The requested review by the
-actual executor and Claude coordinator is pending; prior independent synthetic
-review is not represented as their approval.
+do not validate live timers or a GitHub transport. The actual executor's review
+was relayed with verified receipts: topology matched, and four documentation/
+example corrections were requested. This update makes config/input locations
+explicitly external, uses `review` for read-only inspection, describes the
+fixture's `output/` directory reservation and documents actual bounds/no renewal.
+Runtime behavior is unchanged. The actual Claude coordinator subsequently read
+the skill plus roles, topology, workflow, handoff and selected adapter sections
+at the licensed checkpoint. It confirmed the model, reported no access blocker,
+and supplied host-specific scheduling/messaging observations plus handoff and
+resource corrections. It did not read scripts, tests, protocol or provenance;
+this is a workflow review, not its approval of runtime correctness or release.
+The adapter reference now distinguishes observed desktop behavior, host tool
+documentation and portable toolkit capabilities. Both actual lane reviews are
+complete; neither substitutes for publication authority or a live adapter test.
+
+This follow-up also exercised the shipped read-only request from external
+private config/input files. Config-relative roots resolved there, a concurrent
+write reservation could coexist with the review, and the input source stayed
+unchanged. A synthetic clock check confirmed the 3600-second default claim and
+86400-second message TTL; status/check, ACK/note and same-key claim retries did
+not renew either deadline.
+
+Under contention, the old distinct-send test twice received the documented
+busy exit code 4 rather than immediate success for every sender. The test now
+permits one same-key caller retry after its competing transactions settle,
+then repeats successful action keys and verifies exactly three messages,
+idempotency records and delivery events plus a complete snapshot with no partials.
+The engine's lock/retry bounds were not changed. This checks bounded busy
+handling without promising every simultaneous write will succeed immediately.
+
+An independent follow-up used a fresh temporary snapshot and passed the
+focused contention check, all 40 tests and structural/link/source-hash checks.
+It found no material blocker in the corrected source and verified that host
+observations and external seam/resource agreements are not toolkit guarantees.
+Diagram source was reviewed for roles and boundaries; rendered pixels were
+not independently checked in this follow-up.
 
 The installed skill-creator's `quick_validate.py` was attempted. Its installed
 Python lacks PyYAML (`ModuleNotFoundError: yaml`); no dependency was installed.

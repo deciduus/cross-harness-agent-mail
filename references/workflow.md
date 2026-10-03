@@ -13,6 +13,9 @@ from a source example or relocate another owner's active workspace.
 ## Compatible batches and forward repair
 
 Pin the combined base and each included head, dependency order and exact scopes.
+Receive only the pinned commits or patches named in the packet. Copying an
+author's live working tree can include newer unsubmitted work and does not
+preserve the reviewed artifact identity.
 Admit a batch when interfaces, source inputs and ownership are compatible and
 the user's authorization covers that environment. A development experiment may
 be integrated before every feature has final experiential acceptance when that
@@ -26,9 +29,11 @@ Fix the concrete failure and retest the affected delta. Preserve the larger
 goal and do not restart a broad review loop for every local refinement.
 
 Maintain distinct evidence states: proposed → implemented → independently
-reviewed (if assigned) → integrated → accepted for a named scope → authorized
+reviewed (if assigned) → source-admitted (if tracked) → integrated → accepted for a named scope → authorized
 publication → served/artifact identity verified. These are ledger claims,
 not an automatic state machine or permissions granted by this toolkit.
+Source-admitted records the receiving owner admitting the pinned source; it
+does not establish combined behavior, quality acceptance or publication authority.
 
 ## Shared resources
 
@@ -38,10 +43,18 @@ mechanism; do not infer availability from a historical receipt or lease expiry.
 Only release your own exact resource through its owner mechanism. Independent
 authoring, small CPU probes, dependency analysis and packet preparation continue
 while a renderer, shared browser, heavy build or service is reserved.
+State the turn order and a turn-length norm so long batches cannot silently
+starve short integration checks. Prefer one host-supported background waiter
+per lane that notifies once on completion, rather than repeated polling turns.
+Neither this toolkit nor a historical receipt enforces fairness; use the
+project's existing mechanism and named resource owner.
 
 Do not block all work behind a graphics slot, duplicate shared services for
 each feature, kill another owner's process, or delete a stale-looking lock.
 Preserve inputs, failure evidence, persistent data and recovery checkpoints.
+If the owner lacks permission to stop its own process, give the operator its
+exact identifiers and stop action. Do not route the stop through another agent
+to bypass that permission boundary.
 If a resource is too slow, report measured contention and propose a bounded
 adjustment to the existing owner. Resource congestion does not establish
 feature quality or justify silently narrowing the requested product.

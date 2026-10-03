@@ -382,12 +382,22 @@ test('competing actual processes yield exactly one claim and one fencing owner',
 test('concurrent distinct sends preserve both updates and snapshots parse completely', async t => {
   const f = await fixture(t);
   const mailbox = createMailbox(f.config);
-  const requests = [1, 2, 3].map(index => mailbox.execute('send', { from: 'coordinator', to: 'worker', kind: 'request', body: `Synthetic concurrent ${index}.`, scope: ['src/'], idempotencyKey: `concurrent-${index}` }));
-  const results = await Promise.all(requests);
+  const inputs = [1, 2, 3].map(index => ({ from: 'coordinator', to: 'worker', kind: 'request', body: `Synthetic concurrent ${index}.`, scope: ['src/'], idempotencyKey: `concurrent-${index}` }));
+  const competing = await Promise.all(inputs.map(input => mailbox.execute('send', input)));
+  // A bounded lock attempt may stop busy under contention. Once the competing
+  // transactions settle, permit one caller retry with the exact same action key.
+  assert.ok(competing.some(result => result.code === 0), JSON.stringify(competing));
+  const results = [];
+  for (let index = 0; index < competing.length; index++) {
+    assert.ok([0, 4].includes(competing[index].code), JSON.stringify(competing[index]));
+    results.push(competing[index].code === 4 ? await mailbox.execute('send', inputs[index]) : competing[index]);
+  }
   results.forEach(ok);
+  for (const input of inputs) ok(await mailbox.execute('send', input));
   assert.equal(ok(await f.run('status', {})).messages.length, 3);
   const state = JSON.parse(await fs.readFile(path.join(f.config.mailboxDir, 'state.json'), 'utf8'));
   assert.equal(Object.keys(state.idempotency).length, 3);
+  assert.equal(state.events.filter(event => event.type === 'delivered').length, 3);
   assert.equal((await fs.readdir(f.config.mailboxDir)).filter(name => name.endsWith('.part')).length, 0);
 });
 

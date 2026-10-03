@@ -6,6 +6,7 @@
 | Codex manual consumer | Configured participant + CLI | None | Routing tested; no live Codex session trial |
 | Claude manual consumer | Configured participant + CLI | None | Routing tested; no live Claude session trial |
 | Interactive Claude host scheduling | Session-created background checks/interval wake | External to this toolkit | User-reported Claude coordinator/Codex executor setup; host docs, no independent live-host test |
+| Host-native session messaging | Targeted delivery, possibly queued or wake | External to this toolkit | Observed by the actual coordinator in its desktop host; toolkit has no adapter |
 | Other manual consumer | Arbitrary configured participant + CLI | None | Same routing contract; host-specific discovery untested |
 | Original PowerShell trial | Original Codex/Claude file protocol | None | Windows synthetic lifecycle/claim tests |
 | GitHub PR comments | Human/authorized host-tool delivery | None | Optional documented route; no automated posting adapter |
@@ -34,8 +35,11 @@ primarily PR/comment coordination, plus local mail for sensitive handoffs.
 The lead chat (dot or another lead agent) keeps project direction and reconciles
 their findings. The inspected coordinator sources explicitly describe an
 interactive session cron, delta checks and background-completion notifications.
-They distinguish that session from unattended scheduled tasks; the source's
-message-tool restriction is host-specific, not a universal Claude Routine rule.
+They distinguish that session from unattended scheduled tasks. In the reviewed
+desktop host, an unattended scheduled pass could read/post PR comments but
+could not message sessions, even by stable ID. It records pending relays for
+the interactive coordinator. This is observed host behavior, not a universal
+Claude Routine rule or a guarantee for other versions.
 
 An interactive session with those host tools can configure receiving itself;
 it need not begin with a pre-existing Claude Routine. A conceptual setup request:
@@ -50,19 +54,45 @@ Choose cadence with the user and available host. Verify the registered task in
 that host and an actual receipt on the first activation; a setup proposal is
 not proof it runs. Background completion notifications are another host route.
 No task is registered by this package or its demo.
+Host checks do not renew a claim or message TTL; this toolkit has no renewal
+API. Use bounded work slices and inspect actual deadlines; see
+[defaults and expiry](protocol.md#defaults-bounds-and-expiry).
 
 [Claude Code's scheduling documentation](https://code.claude.com/docs/en/scheduled-tasks)
 describes `/loop` and `CronCreate` within a session, separately from cloud
 Routines. Local execution requires Claude Code to keep running; due prompts
 wait for an idle turn and missed intervals do not replay individually. Its
-current recurring-task expiry is seven days. Resume restores eligible cron
-tasks with exceptions; background Bash/monitor tasks are not restored. These
-are documented Claude Code limits, not guarantees for every Claude host/version.
+current recurring-task expiry is seven days. Persistence across restart varies
+by host and version. The actual coordinator's scheduling tool described jobs as
+session-only/in-memory, with its durability option having no effect; it observed
+job creation, replacement and deletion. Do not assume restoration: after a
+restart inspect the registered jobs and re-create the authorized interval if
+missing. Background waits/notifications also need their own lifetime check.
+Official documentation and the reviewed desktop tool describe different
+behavior; verify the running host rather than treating either as universal.
 
 Exact tool schemas, notification hooks and lifetime of the owner's running
 arrangement were not independently inspected or tested. Verify them in that
 host. No generic cross-host wake/stop adapter is implied, and mailbox arrival
 alone cannot activate another agent.
+
+## Host-native session pointers and limits
+
+The actual coordinator observed stable-session-ID messages waking an idle
+desktop session or queuing when it was busy. Short display labels changed after
+restart. Where this capability is verified and authorized, target the stable
+session ID and retain the host's delivery/queued receipt. A started turn still
+does not prove the packet was ACKed or applied. This is a separate host route;
+the file-mail CLI still reports `wake: false` and `stopSession: false`.
+
+In that reviewed host/version, direct automated session sends stopped after
+10 messages since the user's last message to the coordinator chat. The next
+user message reset the allowance. Treat this as observed coverage, not a
+portable quota or a toolkit setting. Use one authorized shared-thread broadcast
+for common direction and save direct pointers for lane-specific asks/wakes.
+On refusal, record pending activation and report it to the operator; do not
+spin or route around the cap. An unattended pass in this host records/posts
+only; the interactive coordinator handles its queued session relays.
 
 ## Claude manual consumer: efficient passes
 
@@ -83,6 +113,9 @@ rechecks. These ideas apply to any engine; for a Claude session using this skill
   actually present and authorized. Prefer one final completion/failure receipt
   over progress messages that repeatedly activate a session. This manual
   adapter provides no notification or wake mechanism itself.
+  For contended resources, state the turn order and length norm and prefer one
+  background waiter per lane with one completion notification over polling
+  turns; see [resource coordination](workflow.md#shared-resources).
 - Report a delivery, blocker, decision or changed evidence; omit repeated
   "still waiting" messages. Keep critic rechecks focused on changed areas and
   affected controls; broaden discovery when requested or materially justified.
@@ -97,9 +130,8 @@ PR destinations, tool hooks, machine limits and billing/token anecdotes remain
 project/host-specific. No cron or recurring job is installed or authorized by
 this adaptation. Existing source bytes were preserved; the refreshed source hash
 is recorded in [provenance](provenance.md).
-The latest source also contains a particular desktop messaging cap; its numeric
-limit is not a portable capability claim or a setting enforced by this package.
-The batching principle above is generalized; re-discover the actual host limit.
+The host-specific observations above came from the coordinator's actual review.
+Re-discover the current host limit; they are not settings enforced by this package.
 
 ## Optional PR route
 

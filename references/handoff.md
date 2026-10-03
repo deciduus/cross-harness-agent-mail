@@ -54,3 +54,10 @@ For ownership changes, offer transfer naming target and reason; the receiver
 must explicitly accept. Preserve packet identity, source custody, failures and
 remaining work. Until acceptance, no new executor gains the claim. The accepted
 transfer records a receipt and new fencing token; old credentials cannot finish.
+
+For a seam within one shared file, state responsibility as well as path:
+`src/map.js` drawing functions go to owner A; state/input remain with owner B;
+one integration owner composes the patches; no whole-file overwrite. This is
+an external coordination agreement, not symbol-level enforcement by the CLI.
+Its write reservations still cover files/directories, so conflicting claims
+cannot become concurrent writers merely by declaring disjoint functions.

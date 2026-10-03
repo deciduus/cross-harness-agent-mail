@@ -35,22 +35,31 @@ and [Claude Code scheduling](https://code.claude.com/docs/en/scheduled-tasks).
 
 ```mermaid
 flowchart TB
-  U[User] <--> L[dot / lead-agent chat: direction and orchestration]
-  L -->|focused brief| E[Codex executor]
-  C[Interactive Claude coordinator] <--> P[GitHub PR/comments: shared coordination]
-  E <--> P
-  E <-->|private local handoff where accessible| C
-  H[Claude host interval or notification] --> C
-  E --> A[Codex workers and optional critic]
-  C --> B[Claude workers and optional critic]
-  U -. direct direction .-> E
-  U -. direct direction .-> C
-  U -. direct direction .-> B
-  E -. findings and reconciliation .-> L
-  C -. findings and reconciliation .-> L
-  E --> I[Existing integration owner]
-  I -->|verified result and evidence| L
+  U[User] <--> L[dot / lead-agent chat]
+  L <-->|briefs and findings| P[GitHub PR / shared coordination]
+  subgraph T[Platform teams]
+    direction LR
+    subgraph X[Codex example]
+      direction TB
+      E[Executor] --> A[Workers / optional critic]
+    end
+    subgraph Y[Claude example]
+      direction TB
+      C[Interactive coordinator] --> B[Workers / optional critic]
+    end
+    E <-->|private local handoff| C
+  end
+  P <--> E
+  P <--> C
+  A --> I[Existing integration owner]
+  B --> I
+  I --> V[Verified result / lead reports back]
 ```
+
+Read from top to bottom: direction, shared coordination, platform teams, then
+one integrated result. Host timers and session messages activate receiving
+separately; they are not another work queue. Direct user direction and the
+return of findings are described below rather than drawn as crossing arrows.
 
 These are logical responsibilities, not a required product/process hierarchy.
 Another capable chat can be the lead; small teams can combine roles. Codex-only,
@@ -105,10 +114,10 @@ receipt and ownership rules.
 
 For a synthetic catalog job, the user speaks to dot / a lead-agent chat, which
 refines the goal and asks an executor to normalize labels.
-The executor and coordinator reserve an output file and hand it to a named
+The executor and coordinator reserve the `output/` directory and hand it to a named
 worker. The user then tells that worker, “Keep the original label too.” The worker
 checkpoints its work, records the changed acceptance and sends an update upward.
-That refinement fits the same output reservation; another requested file would
+That refinement fits the same directory reservation; a file outside it would
 need a new ownership decision and packet before editing.
 
 A reviewer finds the first candidate lost original labels. The failed candidate
@@ -165,7 +174,19 @@ Copy one of `examples/config-mixed.json`, `examples/config-codex.json`, or
 assignments. Its `workflowAssignments` field is descriptive metadata; leader and
 integrator use existing coordinator role labels, not new execution privileges.
 Set its project/mailbox roots and allowlist to your project. Keep local config,
-claim tokens, mailbox state and evidence out of the repository. CLI usage and
+action input JSON, claim tokens, mailbox state and evidence outside the installed
+skill and out of version control. Template-relative roots resolve from the copied
+config's directory, so set them to your actual project and private mailbox.
+For example, from the package directory with a separate sibling private folder:
+
+```sh
+node scripts/mail.mjs capabilities --config ../coordination-private/local-config.json
+node scripts/mail.mjs send --config ../coordination-private/local-config.json --input ../coordination-private/review.json
+```
+
+Adjust these paths to your external private workspace when installed elsewhere.
+Copy/edit the read-only `examples/request.json` into that private input file;
+its `kind: review` grants no write reservation. CLI usage and
 exit codes are in [protocol](references/protocol.md).
 
 ## Install the skill
@@ -181,7 +202,8 @@ consume `SKILL.md` and use the same CLI, subject
 to their own tool and permission model.
 
 The directory remains self-contained: scripts and references are relative to
-the skill. Machine/project configuration remains external. Installing a skill
+the skill. Config, action inputs, token-bearing results and mailbox state remain
+in your external private workspace, never inside the installed skill. Installing a skill
 does not connect it to another session or authorize public GitHub comments.
 
 ## Small architecture
