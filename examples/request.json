@@ -1,0 +1,10 @@
+{
+  "from": "coordinator",
+  "to": "builder",
+  "kind": "request",
+  "body": "Task: inspect a synthetic source file and report what you found. User-authorized scope: local read-only inspection. Done when: send an ACK receipt, then a concise result with evidence. Stop and ask the operator if the task requires new permission.",
+  "scope": ["src/"],
+  "refs": [],
+  "ttlSeconds": 3600,
+  "idempotencyKey": "example-first-request"
+}

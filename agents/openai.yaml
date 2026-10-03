@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Mail Coordinator"
+  short_description: "Coordinate scoped agent work with claims and receipts"
+  default_prompt: "Use $agent-mail-coordinator to handle one scoped agent handoff and record its receipt."

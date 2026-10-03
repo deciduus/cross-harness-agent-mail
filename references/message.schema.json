@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-mail-coordinator:message:v1",
+  "title": "Local mailbox message v1",
+  "description": "Persisted message shape. Delivery and self-declared ownership labels grant no task permission or session wake capability.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "from", "to", "requestedTo", "kind", "expects", "body", "scope", "refs", "thread", "replyTo", "hops", "createdAt", "expiresAt", "status", "owner", "claim", "transfer", "resultId", "deadReason"],
+  "properties": {
+    "id": {"type": "string", "format": "uuid"},
+    "from": {"$ref": "#/$defs/participant"},
+    "to": {"$ref": "#/$defs/participant"},
+    "requestedTo": {"$ref": "#/$defs/participant"},
+    "kind": {"enum": ["request", "review", "result", "ack", "note"]},
+    "expects": {"enum": ["result", "none"]},
+    "body": {"type": "string", "minLength": 1},
+    "scope": {"type": "array", "minItems": 1, "maxItems": 64, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 400}},
+    "refs": {"type": "array", "maxItems": 64, "items": {"type": "object", "additionalProperties": false, "required": ["path", "sha256"], "properties": {"path": {"type": "string", "minLength": 1, "maxLength": 400}, "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}}},
+    "thread": {"type": "string", "format": "uuid"},
+    "replyTo": {"type": ["string", "null"], "format": "uuid"},
+    "hops": {"type": "integer", "minimum": 0},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "expiresAt": {"type": "string", "format": "date-time"},
+    "status": {"enum": ["new", "claimed", "done", "dead"]},
+    "owner": {"$ref": "#/$defs/participant"},
+    "claim": {"oneOf": [{"type": "null"}, {"type": "object", "additionalProperties": false, "required": ["actor", "session", "token", "claimedAt", "leaseUntil"], "properties": {"actor": {"$ref": "#/$defs/participant"}, "session": {"type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,95}$"}, "token": {"type": "string", "format": "uuid"}, "claimedAt": {"type": "string", "format": "date-time"}, "leaseUntil": {"type": "string", "format": "date-time"}}}]},
+    "transfer": {"oneOf": [{"type": "null"}, {"type": "object", "additionalProperties": false, "required": ["id", "to", "from", "session", "offeredAt", "reason"], "properties": {"id": {"type": "string", "format": "uuid"}, "to": {"$ref": "#/$defs/participant"}, "from": {"$ref": "#/$defs/participant"}, "session": {"type": "string"}, "offeredAt": {"type": "string", "format": "date-time"}, "reason": {"type": "string", "minLength": 1}}}]},
+    "resultId": {"type": ["string", "null"], "format": "uuid"},
+    "deadReason": {"type": ["string", "null"]},
+    "outcome": {"enum": ["ok", "partial", "refused", "needs-human"]}
+  },
+  "allOf": [
+    {"if": {"properties": {"kind": {"const": "result"}}}, "then": {"required": ["outcome"], "properties": {"expects": {"const": "none"}}}},
+    {"if": {"properties": {"kind": {"enum": ["request", "review"]}}}, "then": {"properties": {"expects": {"const": "result"}}}},
+    {"if": {"properties": {"kind": {"enum": ["ack", "note"]}}}, "then": {"properties": {"expects": {"const": "none"}}}}
+  ],
+  "$defs": {"participant": {"type": "string", "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,63}$"}}
+}

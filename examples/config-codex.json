@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "projectRoot": "./example-project",
+  "mailboxDir": "./.local-mailbox",
+  "allowedScope": ["src/", "tests/"],
+  "operator": "operator",
+  "participants": {
+    "operator": {"role": "operator", "engine": "other"},
+    "coordinator": {"role": "coordinator", "engine": "codex"},
+    "builder": {"role": "executor", "engine": "codex"},
+    "critic": {"role": "critic", "engine": "codex"}
+  },
+  "limits": {"maxLeaseSeconds": 3600, "maxTtlSeconds": 86400, "maxHops": 3, "maxBodyBytes": 204800},
+  "adapter": {"type": "manual"}
+}

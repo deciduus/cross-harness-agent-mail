@@ -1,0 +1,12 @@
+node_modules/
+.agent-mail/
+.local-mailbox/
+example-project/
+mailbox/
+local-config*.json
+*.log
+*.tmp
+*.part
+__pycache__/
+coverage/
+test-results/
