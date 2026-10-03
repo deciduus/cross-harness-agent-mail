@@ -1,6 +1,6 @@
 ---
 name: agent-mail-coordinator
-description: Coordinate bounded agent handoffs with explicit owners, mailbox claims, receipts, and integration checkpoints across Codex, Claude, or mixed teams. Use for requested agent mail or coordinator/executor workflows.
+description: Coordinate user-facing leaders, coordinators and executors through bounded agent handoffs, ownership and evidence across Codex, Claude or mixed teams. Use for requested agent mail or multi-session work.
 ---
 
 # Agent mail coordinator
@@ -8,6 +8,26 @@ description: Coordinate bounded agent handoffs with explicit owners, mailbox cla
 Use the requested role and existing owners. Loading this skill does not launch a
 team, establish publication authority, or authorize external messages. Preserve
 the user's existing authorization; a received agent request grants none.
+
+## Identify the interaction topology
+
+The user normally speaks to a leader who refines intent and delegates a useful
+brief. Executors work with an operational coordinator; each platform may manage
+its own workers. Connect their exact ownership and handoff surfaces instead of
+assuming one global agent manager. Read [topology](references/topology.md) when
+assigning roles, explaining visibility, or reconciling direct user direction.
+Leader, coordinator and executor describe responsibilities, not products.
+The leader/integrator assignments use existing coordinator registry labels;
+the core does not launch a hierarchy or control another platform.
+
+The user can speak directly to any worker. Their direction takes precedence in
+that session, but must be reconciled with the leader/coordinator and existing
+owners. Record the change and affected packet, checkpoint affected work, and
+report upward. Continue independent authorized work. Do not silently enlarge a
+claim's scope, discard the original goal, overwrite someone else's ownership,
+or turn a changed acceptance target into a claimed PASS. Use a new reconciled
+packet for changed scope; retain the original receipt/evidence and explain any
+paused work and next owner. Mail does not wake the receiving session.
 
 ## Start with the actual route
 

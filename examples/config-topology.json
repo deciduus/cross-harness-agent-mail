@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "projectRoot": "./synthetic-project",
+  "mailboxDir": "./.local-mailbox",
+  "allowedScope": ["inputs/", "output/"],
+  "operator": "user",
+  "participants": {
+    "user": {"role": "operator", "engine": "other"},
+    "leader": {"role": "coordinator", "engine": "codex"},
+    "platformCoordinator": {"role": "coordinator", "engine": "claude"},
+    "executor": {"role": "executor", "engine": "codex"},
+    "workerAlpha": {"role": "executor", "engine": "claude"},
+    "reviewer": {"role": "critic", "engine": "codex"}
+  },
+  "adapter": {"type": "manual"},
+  "workflowAssignments": {
+    "leader": "leader",
+    "integrator": "leader",
+    "coordinator": "platformCoordinator",
+    "executor": "executor",
+    "platformWorkers": {"codex": ["executor"], "claude": ["workerAlpha"]},
+    "hosting": "Named synthetic fixtures only; no host-managed agent is launched or controlled."
+  }
+}

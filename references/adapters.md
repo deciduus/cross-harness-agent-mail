@@ -10,7 +10,7 @@
 | GitHub PR comments | Human/authorized host-tool delivery | None | Optional documented route; no automated posting adapter |
 
 Use capability detection before selecting a route. Executable capability output
-must distinguish `deliver`, `wake`, and `stopSession`. Installed executables or a
+must distinguish `delivery`, `wake`, and `stopSession`. Installed executables or a
 reachable mailbox do not prove a session can receive a wake-up. Unsupported
 wake/stop requests terminate with an unsupported result; no guessed queue,
 message, cron or process command is attempted.
@@ -43,12 +43,20 @@ rechecks. These ideas apply to any engine; for a Claude session using this skill
 - Report a delivery, blocker, decision or changed evidence; omit repeated
   "still waiting" messages. Keep critic rechecks focused on changed areas and
   affected controls; broaden discovery when requested or materially justified.
+- Check the actual host's communication budget before using a native session
+  pointer. Batch related pointers, keep direct messages for owner-specific asks,
+  and use one authorized durable broadcast when it reaches the intended owners.
+  Preserve separate per-owner receipts. A quota or unavailable pointer leaves
+  delivery/activation pending; it does not justify repeated retry turns.
 
 The source's fixed cron cadence, delta-script paths, GPU commands, session names,
 PR destinations, tool hooks, machine limits and billing/token anecdotes remain
 project/host-specific. No cron or recurring job is installed or authorized by
 this adaptation. Existing source bytes were preserved; the refreshed source hash
 is recorded in [provenance](provenance.md).
+The latest source also contains a particular desktop messaging cap; its numeric
+limit is not a portable capability claim or a setting enforced by this package.
+The batching principle above is generalized; re-discover the actual host limit.
 
 ## Optional PR route
 

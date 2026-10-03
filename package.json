@@ -1,12 +1,13 @@
 {
   "name": "agent-mail-coordinator",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "Bounded local agent handoffs and coordinator/executor skill",
+  "description": "Bounded local handoffs for user-facing leaders, coordinators and executors",
   "engines": {"node": ">=22"},
   "scripts": {
     "test": "node --test scripts/tests/*.test.mjs",
-    "demo": "node scripts/demo.mjs"
+    "demo": "node scripts/demo.mjs",
+    "demo:topology": "node scripts/topology-demo.mjs mixed"
   }
 }

@@ -3,6 +3,13 @@
 Use the project's existing integration and resource owners. This package neither
 creates another integration checkout nor installs a resource scheduler.
 
+Read [topology](topology.md) when a leader, coordinator or directly contacted
+worker changes the brief. Reconcile direction/ownership before affected edits;
+use the same compact delivery ledger so each platform's workers share a target.
+Workspace placement is project configuration: active source, runtime/test
+artifacts and archive roots can differ. Do not inherit dated drive/machine paths
+from a source example or relocate another owner's active workspace.
+
 ## Compatible batches and forward repair
 
 Pin the combined base and each included head, dependency order and exact scopes.

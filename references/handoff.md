@@ -19,6 +19,7 @@ Readiness: <implemented / reviewed / integration-ready for named scope>
 Limits: <experimental behavior, missing checks, blocked dependencies>
 Recovery: <checkpoint/rollback and named forward fixer>
 Next: <receiving owner and action, resources retained/released>
+Direction revision: <latest user change, affected acceptance, reconciled owners>
 ```
 
 ACK body:
@@ -34,6 +35,13 @@ ACK means receipt. Applied means a concrete commit on the receiving target
 contains the packet and the relevant verification passed. Record that commit
 in the result or integration ledger. Delivery timestamps and test counts are
 not quality acceptance.
+
+For a direct user interjection record: source session label, packet, requested
+change, retained/new scope, current owner, affected acceptance/evidence and
+receiving leader/coordinator. This is a concise decision record, not a chat
+transcript. Record prepared, delivered and acknowledged separately; a local note
+does not prove the other session has seen it. Keep the original goal owned and
+name the next action for any paused/conflicting portion.
 
 For ownership changes, offer transfer naming target and reason; the receiver
 must explicitly accept. Preserve packet identity, source custody, failures and

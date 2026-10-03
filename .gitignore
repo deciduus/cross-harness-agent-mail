@@ -2,6 +2,7 @@ node_modules/
 .agent-mail/
 .local-mailbox/
 example-project/
+synthetic-project/
 mailbox/
 local-config*.json
 *.log

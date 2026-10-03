@@ -6,8 +6,10 @@ const root = resolve(process.argv[2] ?? '.');
 const git = args => execFileSync('git', ['-C', root, '-c', 'core.excludesFile=', ...args], {encoding:'utf8', maxBuffer: 10*1024*1024});
 const errors = [];
 let checked = 0;
+let messagesChecked = 0;
 const patterns = [
-  [/\b(?:[A-Za-z]:[\\/](?:Users|Documents and Settings)[\\/])[^\s`"']+/i, 'personal absolute path'],
+  [/\b(?:[A-Za-z]:[\\/]+(?:Users|Documents and Settings)[\\/]+)[^\s`"']+/i, 'personal absolute path'],
+  [/(?:^|[\s"'`(=])\/(?:home|Users)\/[^/\s"'`]+(?:\/|(?=$|[\s"'`]))/m, 'personal absolute path'],
   [/\bgh[pousr]_[A-Za-z0-9]{30,}\b/, 'GitHub credential'],
   [/\bAKIA[A-Z0-9]{16}\b/, 'cloud credential'],
   [/\bsk-[A-Za-z0-9_-]{24,}\b/, 'API credential'],
@@ -18,15 +20,19 @@ for (const term of process.argv.slice(3)) {
   const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   patterns.push([new RegExp(`\\b${escaped}\\b`, 'i'), 'configured private source/project term']);
 }
-function scan(path, content, label) {
-  checked++;
+function scan(path, content, label, commitMessage = false) {
+  if (commitMessage) messagesChecked++; else checked++;
   if (Buffer.byteLength(content) > 250000) errors.push(`${label}:${path}: exceeds 250 KB review bound`);
-  if (/(?:^|\/)(?:node_modules|\.agent-mail|mailbox|\.env)(?:\/|$)|\.(?:sqlite|db|log|zip|exe|png|jpg|mp4)$/i.test(path)) errors.push(`${label}:${path}: unexpected runtime/generated artifact`);
+  if (!commitMessage && /(?:^|\/)(?:node_modules|\.agent-mail|\.local-mailbox|mailbox|\.env)(?:\/|$)|\.(?:sqlite|db|log|zip|exe|png|jpg|mp4)$/i.test(path)) errors.push(`${label}:${path}: unexpected runtime/generated artifact`);
   for (const [pattern, reason] of patterns) if (pattern.test(content)) errors.push(`${label}:${path}: ${reason}`);
 }
 for (const path of git(['diff','--cached','--name-only','--diff-filter=ACMR','-z']).split('\0').filter(Boolean)) scan(path, git(['show',`:${path}`]), 'staged');
 const revs = git(['rev-list','--all']).trim().split('\n').filter(Boolean);
-for (const rev of revs) for (const path of git(['ls-tree','-r','--name-only','-z',rev]).split('\0').filter(Boolean)) scan(path,git(['show',`${rev}:${path}`]),'history');
+for (const rev of revs) {
+  // Subject/body only: author identity is reviewed separately, not treated as private text.
+  scan(rev, git(['show', '-s', '--format=%B', rev]), 'commit-message', true);
+  for (const path of git(['ls-tree','-r','--name-only','-z',rev]).split('\0').filter(Boolean)) scan(path,git(['show',`${rev}:${path}`]),'history');
+}
 if (!checked) errors.push('No staged or committed files to inspect');
 if (errors.length) { console.error(errors.join('\n')); process.exit(1); }
-console.log(`PASS release scan: ${checked} staged/history blobs, ${revs.length} commits; heuristic scan plus human source review required`);
+console.log(`PASS release scan: ${checked} staged/history blobs, ${messagesChecked} commit messages, ${revs.length} commits; heuristic scan plus human source review required`);
