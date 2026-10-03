@@ -1,12 +1,12 @@
-# Agent mail coordinator
+# Coordinate agents across Claude, Codex, and beyond.
 
-A small skill and file-mail toolkit for user-facing leaders, coordinators,
-executors and their workers.
-Use separate participant IDs for Codex-only, Claude-only, mixed, or other-agent
-teams. It carries work and receipts; people or the host agent system activate
-sessions. It does not run agents, install daemons, poll, or schedule jobs.
-An interactive Claude session can configure its host's background mailbox
-checks and interval wake-ups separately; the toolkit does not register them.
+Talk to a lead agent. Let coordinators and executors organize the work. Use
+GitHub for shared progress and local agent mail for private handoffs, with
+clear ownership across sessions.
+
+`agent-mail-coordinator` is a small skill and local file-mail toolkit.
+GitHub handoffs use existing authorized tools; session activation comes from
+the host. It supports Codex-only, Claude-only, mixed and other-agent workflows.
 
 **Private review package. No open-source license is granted.**
 See [provenance and rights](references/provenance.md) before redistribution.
@@ -66,18 +66,9 @@ miss, two workers could approach the same file, queues could sit idle, and a
 finished piece did not always reach the integrated result.
 
 The useful idea was small: give work an address, one owner, a receipt and a
-clear return path. The user mainly chats with a leader who refines the request
-and delegates a useful brief. In the originating setup that Codex-side leader
-is **dot**; it could instead be a leader chat in Claude or another capable host.
-Executors work with an operational coordinator, currently Claude Code in that
-setup but replaceable. Each platform can manage its own workers through its
-verified native tools. Mail and exact handoffs connect those teams.
-
-Role and product are independent. Leader is not a Codex-only privilege,
-coordinator is not a Claude-only product, and an executor may manage workers on
-either side. The user can talk directly to any session or worker. New direction
-is recorded and reconciled with the leader/coordinator and current file owners;
-it must not silently widen a claim or disappear in a separate conversation.
+clear return path. The lead keeps intent coherent while the team turns separate
+pieces into an integrated result. A direct instruction to any worker remains
+visible to relevant owners, rather than widening a claim or getting lost.
 
 Sending a packet alone is delivery. A separately configured host timer or
 notification can activate the receiving session; neither a send nor a timer
